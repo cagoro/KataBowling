@@ -104,6 +104,27 @@ namespace KataBowlingTest
         }
 
 
+        [Test]
+        public void ScoreWithTwoConsecutiveStrikes()
+        {
+            var game = new Game();
+
+            for (int i = 0; i < 10; i++)
+            {
+                game.Roll(2);
+            }
+
+            game.Roll(10);
+            game.Roll(10);
+
+            for (int i = 12; i < 18; i++)
+            {
+                game.Roll(2);
+            }
+            Assert.AreEqual(66, game.Score());
+        }
+
+
 
     }
 }
