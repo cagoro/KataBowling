@@ -32,9 +32,13 @@ namespace KataBowlingTest
         public void ScoreWithSpare()
         {
             var game = new Game();
+            for (int i = 0; i < 10; i++)
+            {
+                game.Roll(2);
+            }
             game.Roll(1);
             game.Roll(9);
-            for (int i = 2; i < 20; i++)
+            for (int i = 12; i < 20; i++)
             {
                 game.Roll(2);
             }
