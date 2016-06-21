@@ -83,5 +83,27 @@ namespace KataBowlingTest
             }
             Assert.AreEqual(55, game.Score());
         }
+
+        [Test]
+        public void ScoreWithStrike()
+        {
+            var game = new Game();
+
+            for (int i = 0; i < 10; i++)
+            {
+                game.Roll(2);
+            }
+
+            game.Roll(10);
+
+            for (int i = 11; i < 19; i++)
+            {
+                game.Roll(2);
+            }
+            Assert.AreEqual(50, game.Score());
+        }
+
+
+
     }
 }
