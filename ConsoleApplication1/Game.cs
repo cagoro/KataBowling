@@ -3,7 +3,7 @@
     public class Game
     {
         private int _pinCount;
-        private bool wasThereASpare;
+        private bool _wasThereASpare;
         private int _previousPins;
         private bool _isAFirstShot;
 
@@ -16,10 +16,10 @@
         {
             if (_isAFirstShot)
             {
-                if (wasThereASpare)
+                if (_wasThereASpare)
                 {
                     _pinCount += pins * 2;
-                    wasThereASpare = false;
+                    _wasThereASpare = false;
                 }
                 else
                 {
@@ -30,7 +30,7 @@
             else
             {
                 _pinCount += pins;
-                wasThereASpare = _previousPins + pins == 10;
+                _wasThereASpare = _previousPins + pins == 10;
                 _isAFirstShot = true;
             }
             _previousPins = pins;

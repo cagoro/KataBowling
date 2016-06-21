@@ -43,10 +43,45 @@ namespace KataBowlingTest
                 game.Roll(2);
             }
             Assert.AreEqual(48, game.Score());
+        }  
+      
+        [Test]
+        public void ScoreWithMultipleNotConsecutiveSpares()
+        {
+            var game = new Game();
+            game.Roll(1);
+            game.Roll(9);  
+            for (int i = 2; i < 10; i++)
+            {
+                game.Roll(2);
+            }    
+            game.Roll(1);
+            game.Roll(9);
+            for (int i = 12; i < 20; i++)
+            {
+                game.Roll(2);
+            }
+            Assert.AreEqual(56, game.Score());
         }
 
-        
+        [Test]
+        public void ScoreWithMultipleConsecutiveSpares()
+        {
+            var game = new Game();
 
-
+            for (int i = 0; i < 8; i++)
+            {
+                game.Roll(2);
+            }
+            game.Roll(1);
+            game.Roll(9);  
+            game.Roll(1);
+            game.Roll(9);
+            for (int i = 12; i < 20; i++)
+            {
+                game.Roll(2);
+            }
+            Assert.AreEqual(55, game.Score());
+        }
     }
 }
