@@ -17,37 +17,47 @@
         {
             if (_isAFirstShot)
             {
-                if (_wasThereAStrike)
-                {
-                    _pinCount += pins * 2;
-                }
-                _wasThereAStrike = (pins == 10);
-                if (_wasThereASpare)
-                {
-                    _pinCount += pins * 2;
-                    _wasThereASpare = false;
-                }
-                else
-                {
-                    _pinCount += pins;
-                }
-                _isAFirstShot = _wasThereAStrike;
+                ProcessFirstShot(pins);
             }
             else
             {
-                if (_wasThereAStrike)
-                {
-                    _pinCount += pins * 2;
-                    _wasThereAStrike = false;
-                }
-                else
-                {
-                    _pinCount += pins;
-                }
-                _wasThereASpare = _previousPins + pins == 10;
-                _isAFirstShot = true;
+                ProcessSecondShot(pins);
             }
             _previousPins = pins;
+        }
+
+        private void ProcessSecondShot(int pins)
+        {
+            if (_wasThereAStrike)
+            {
+                _pinCount += pins * 2;
+                _wasThereAStrike = false;
+            }
+            else
+            {
+                _pinCount += pins;
+            }
+            _wasThereASpare = _previousPins + pins == 10;
+            _isAFirstShot = true;
+        }
+
+        private void ProcessFirstShot(int pins)
+        {
+            if (_wasThereAStrike)
+            {
+                _pinCount += pins * 2;
+            }
+            _wasThereAStrike = (pins == 10);
+            if (_wasThereASpare)
+            {
+                _pinCount += pins * 2;
+                _wasThereASpare = false;
+            }
+            else
+            {
+                _pinCount += pins;
+            }
+            _isAFirstShot = _wasThereAStrike;
         }
 
         public int Score()
