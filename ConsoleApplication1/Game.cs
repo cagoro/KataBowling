@@ -6,6 +6,7 @@
         private bool _wasThereASpare;
         private int _previousPins;
         private bool _isAFirstShot;
+        private bool _wasThereAStrike;
 
         public Game()
         {
@@ -16,6 +17,11 @@
         {
             if (_isAFirstShot)
             {
+                if (_wasThereAStrike)
+                {
+                    _pinCount += pins * 2;
+                }
+                _wasThereAStrike = (pins == 10);
                 if (_wasThereASpare)
                 {
                     _pinCount += pins * 2;
@@ -25,11 +31,19 @@
                 {
                     _pinCount += pins;
                 }
-                _isAFirstShot = false;
+                _isAFirstShot = _wasThereAStrike;
             }
             else
             {
-                _pinCount += pins;
+                if (_wasThereAStrike)
+                {
+                    _pinCount += pins * 2;
+                    _wasThereAStrike = false;
+                }
+                else
+                {
+                    _pinCount += pins;
+                }
                 _wasThereASpare = _previousPins + pins == 10;
                 _isAFirstShot = true;
             }
